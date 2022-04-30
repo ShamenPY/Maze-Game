@@ -12,6 +12,8 @@ class App():
 
 
   def draw_maze(self):
+    self.screen = pygame.display.set_mode((width,height))
+    background_colour = (255,255,255)
     # pygame.draw.line(self.screen, BLACK, [670, 540], [10, 0], 5)
     pygame.draw.line(self.screen, BLACK, [0, 457], [71, 457], 5)
     pygame.draw.line(self.screen, BLACK, [123, 540], [123, 477], 5) # linia w dol
@@ -42,10 +44,9 @@ class App():
   def create_screen(self):
 
     (width, height) = (670, 540)
-    self.screen = pygame.display.set_mode((width,height))
-    background_colour = (255,255,255)
+
     self.screen.fill(background_colour)
-    self.draw_maze()
+
     pygame.display.flip()
 
 
@@ -53,16 +54,16 @@ class App():
   def main(self):
 
     self.create_screen()
+    self.draw_maze()
     running = True
     color = (255,0,0)
-    x = pygame.draw.rect(self.screen, color, pygame.Rect(self.x, self.y, 60, 60), 30)
 
-    rect = pygame.Rect(x)
+
 
 
 
     while running:
-
+      pygame.draw.rect(self.screen,color,(self.x,self.y,60,60))
 
       print(self.y)
 
