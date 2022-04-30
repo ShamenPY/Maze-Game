@@ -6,9 +6,9 @@ BLACK = (0,0,0)
 class App():
 
   def __init__(self):
+    self.x = 30
+    self.y = 30
     self.main()
-
-
 
 
   def draw_maze(self):
@@ -38,6 +38,7 @@ class App():
 
 
 
+
   def create_screen(self):
 
     (width, height) = (670, 540)
@@ -53,11 +54,22 @@ class App():
 
     self.create_screen()
     running = True
+    color = (255,0,0)
+    x = pygame.draw.rect(self.screen, color, pygame.Rect(self.x, self.y, 60, 60), 30)
 
-    color = (255, 0, 0)
-    x = pygame.draw.rect(self.screen, color, pygame.Rect(30, 30, 60, 60), 30)
     rect = pygame.Rect(x)
+
+
+
     while running:
+
+
+      print(self.y)
+
+
+      pygame.display.flip()
+
+
 
 
       ev = pygame.event.get()
@@ -65,17 +77,15 @@ class App():
         if event.type == pygame.MOUSEBUTTONUP:
           pos = pygame.mouse.get_pos()
           print(pos)
-
-
-      if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_LEFT:
-          rect.x -= 4
-        if event.key == pygame.K_RIGHT:
-          rect.x += 4
-        if event.key == pygame.K_UP:
-          rect.y -= 4
-        if event.key == pygame.K_DOWN:
-          rect.y += 4
+        if event.type == pygame.KEYDOWN:
+          if event.key == pygame.K_LEFT:
+            self.x -= 4
+          if event.key == pygame.K_RIGHT:
+            self.x += 4
+          if event.key == pygame.K_UP:
+            self.y -= 4
+          if event.key == pygame.K_DOWN:
+            self.y += 4
       pygame.display.flip()
 
 
