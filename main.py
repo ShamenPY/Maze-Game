@@ -1,6 +1,6 @@
 import pygame
 BLACK = (0,0,0)
-
+colors = ['black']
 
 
 class App():
@@ -11,9 +11,11 @@ class App():
     self.main()
 
 
+
   def draw_maze(self):
-    self.screen = pygame.display.set_mode((width,height))
+
     background_colour = (255,255,255)
+    self.screen.fill(background_colour)
     # pygame.draw.line(self.screen, BLACK, [670, 540], [10, 0], 5)
     pygame.draw.line(self.screen, BLACK, [0, 457], [71, 457], 5)
     pygame.draw.line(self.screen, BLACK, [123, 540], [123, 477], 5) # linia w dol
@@ -35,6 +37,15 @@ class App():
     pygame.draw.line(self.screen, BLACK, [123, 180], [71, 180], 5)
     pygame.draw.line(self.screen, BLACK, [80, 230], [123, 310], 5)
     pygame.draw.line(self.screen, BLACK, [220, 377], [190, 377], 5)
+    color = (255,0,0)
+    player = pygame.draw.rect(self.screen, color, (self.x, self.y, 60, 60))
+    sprites = pygame.sprite.Group()
+    objects = pygame.sprite.Group()
+    for sprite in objects:
+      sprite.mask = pygame.mask.from_threshold(self.screen, pygame.Color('black'), (1, 1, 1, 255))
+
+    if pygame.sprite.spritecollideany(player, objects, pygame.sprite.collide_mask):
+      print("D")
 
 
 
@@ -42,10 +53,10 @@ class App():
 
 
   def create_screen(self):
-
     (width, height) = (670, 540)
+    self.screen = pygame.display.set_mode((width, height))
 
-    self.screen.fill(background_colour)
+
 
     pygame.display.flip()
 
@@ -53,17 +64,25 @@ class App():
 
   def main(self):
 
+
     self.create_screen()
-    self.draw_maze()
+
     running = True
-    color = (255,0,0)
+
+
+
+
+
+
 
 
 
 
 
     while running:
-      pygame.draw.rect(self.screen,color,(self.x,self.y,60,60))
+
+
+      self.draw_maze()
 
       print(self.y)
 
