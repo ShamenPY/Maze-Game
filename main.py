@@ -2,13 +2,31 @@ import pygame
 
 BLACK = (0, 0, 0)
 colors = ['black']
-mouse = pygame.image.load("mouse.gif")
+mouse_img = pygame.image.load("mouse.png")
+mouse = pygame.transform.scale(mouse_img,(100, 100))
+
 
 bg_img = pygame.image.load("background.png")
 bg = pygame.transform.scale(bg_img, (900,600))
 wall1 = pygame.image.load("wall.png")
+wall2 = pygame.image.load("wall.png")
+wall3 = pygame.image.load("wall.png")
+wall4 = pygame.image.load("wall.png")
+wall5 = pygame.image.load("wall.png")
+wall6 = pygame.image.load("wall.png")
+wall7 = pygame.image.load("wall.png")
+wall8 = pygame.image.load("wall.png")
+wall9 = pygame.image.load("wall.png")
+wall10 = pygame.image.load("wall.png")
+wall11 = pygame.image.load("wall.png")
+wall12 = pygame.image.load("wall.png")
+wall13 = pygame.image.load("wall.png")
+wall14 = pygame.image.load("wall.png")
+wall15 = pygame.image.load("wall.png")
+
+
 clock = pygame.time.Clock()
-clock.tick(60)
+clock.tick(5)
 class App():
 
     def __init__(self):
@@ -16,21 +34,34 @@ class App():
         self.mouseY = 50
         (width, height) = (900, 600)
         self.screen = pygame.display.set_mode((width, height))
+        self.mouserect = mouse.get_rect(center=(self.mouseX,self.mouseY))
         self.main()
-
-        # self.rect = mouse.get_rect(center=(self.mouseX / 2, self.mouseY / 2))
 
     def draw_maze(self):
 
-        self.screen.blit(wall1, (0, 0))
-        self.screen.blit(wall1, (122, 476))
-        self.screen.blit(wall1, (122, 354))
+        self.screen.blit(wall1, (722, 354))
+        self.screen.blit(wall2, (244, 232))
+        self.screen.blit(wall3, (354, 354))
+        self.screen.blit(wall4, (476, 354))
+        self.screen.blit(wall5, (844, 354))#598 720
+        self.screen.blit(wall6, (122, 232))
+        self.screen.blit(wall7, (122, 476))
+        self.screen.blit(wall8, (122, 354))
+        self.screen.blit(wall9, (122, 0))
+        # self.wall9rect = wall9.get_rect(center=(61,0))
 
 
+        self.screen.blit(wall10, (476, 110))#//#
+        self.screen.blit(wall11, (476, -12))
+        self.screen.blit(wall12, (720, -12))
+        self.screen.blit(wall13, (720, 110))
+        self.screen.blit(wall14, (842, 110))
+        self.screen.blit(wall15, (842, -12))
 
+        self.collide = pygame.Rect.colliderect(self.mouserect, self.wall9rect)
 
-
-        # collide = pygame.Rect.colliderect(mouse, colors)
+        if self.collide:
+            print("mysz dotknęła scianę")
 
     def create_screen(self):
         self.screen.blit(bg,(0,0))
@@ -44,6 +75,9 @@ class App():
 
         running = True
         while running:
+            print(self.mouserect)
+
+            self.create_screen()
 
 
             self.draw_maze()
@@ -67,7 +101,9 @@ class App():
                     if event.key == pygame.K_DOWN:
                         self.mouseY += 4
 
-            self.create_screen()
+
+
+
             # pygame.display.flip()
 
             for event in pygame.event.get():
