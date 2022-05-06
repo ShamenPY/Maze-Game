@@ -48,7 +48,7 @@ class App():
         self.screen.blit(wall7, (122, 476))
         self.screen.blit(wall8, (122, 354))
         self.screen.blit(wall9, (122, 0))
-        # self.wall9rect = wall9.get_rect(center=(61,0))
+        self.wall9rect = wall9.get_rect(center=(61,0))
 
 
         self.screen.blit(wall10, (476, 110))#//#
