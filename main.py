@@ -2,8 +2,6 @@ import pygame
 import time
 pygame.init()
 
-
-
 win_jpg = pygame.image.load("winimg.jpg")           #This image will appear when you win the game
 winimg = pygame.transform.scale(win_jpg,(900,600))
 win = pygame.image.load("winbutton.png")
@@ -17,13 +15,6 @@ mouse = pygame.transform.scale(mouse_img,(100, 100))
 font = pygame.font.Font(None, 90)
 black = (0, 0, 0)
 wintext = font.render("YOU WON!", False,black)      #This text will appear when you win the game
-
-
-
-
-
-
-
 
 
 
@@ -97,6 +88,7 @@ class App():
         self.screen.blit(bg,(0,0))
         self.screen.blit(mouse, (self.mouseX, self.mouseY))
 
+
     def win(self):
         """
 
@@ -108,6 +100,7 @@ class App():
         self.screen.blit(wintext, (250, 50))
         pygame.display.flip()
         time.sleep(300)
+
 
     def collidecheck(self):
 
