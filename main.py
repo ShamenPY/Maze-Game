@@ -2,19 +2,19 @@ import pygame
 import time
 pygame.init()
 
-win_jpg = pygame.image.load("winimg.jpg")           #This image will appear when you win the game
+win_jpg = pygame.image.load("winimg.jpg")
 winimg = pygame.transform.scale(win_jpg,(900,600))
 win = pygame.image.load("winbutton.png")
 
 bg_img = pygame.image.load("background.png")
 bg = pygame.transform.scale(bg_img, (900,600))
 
-mouse_img = pygame.image.load("mouse.png")          # It's main character
+mouse_img = pygame.image.load("mouse.png")
 mouse = pygame.transform.scale(mouse_img,(100, 100))
 
 font = pygame.font.Font(None, 90)
 black = (0, 0, 0)
-wintext = font.render("YOU WON!", False,black)      #This text will appear when you win the game
+wintext = font.render("YOU WON!", False,black)
 
 
 
@@ -76,13 +76,12 @@ class App():
         self.winrect = win.get_rect(center=(32, 430))
 
 
-    def create_screen(self):
+    def draw_bg_and_mouse(self):
         """
 
-        This function is first element in while loop,
-        She incessantly gives us background
-        ( Because when background isn't refreshing non-stop, on window are a much of image of mouses )
-        and She incessantly gives us image of mouse with new coordinates
+
+        She incessantly gives us background and
+        image of mouse with new coordinates
 
         """
         self.screen.blit(bg,(0,0))
@@ -106,7 +105,7 @@ class App():
 
         """
 
-        This function is needed for checking collide mouse with walls and mouse with cheese
+        checking collide mouse with walls and mouse with cheese
 
         """
 
@@ -119,7 +118,29 @@ class App():
             elif self.collidewin: # Collide mouse with cheese #
                 running = False
                 self.win()
+    def events_handling(self):
+        """
 
+        This function is checking
+        do you clicking key left, right, down or up.
+
+        """
+
+        ev = pygame.event.get()
+        for event in ev:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    self.mouseX -= 4
+                if event.key == pygame.K_RIGHT:
+                    self.mouseX += 4
+                if event.key == pygame.K_UP:
+                    self.mouseY -= 4
+                if event.key == pygame.K_DOWN:
+                    self.mouseY += 4
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
 
     def main(self):
         """
@@ -127,39 +148,19 @@ class App():
         function main have a loop, which elicit all function needed to the game
         """
 
-        self.create_screen()
+        self.draw_bg_and_mouse()
 
         running = True
         while running:
             self.mouserect = mouse.get_rect(center=(self.mouseX, self.mouseY))
-            self.create_screen()   # Drawing background and mouse
+            self.draw_bg_and_mouse()
             self.draw_maze()       # Drawing walls
             self.collidecheck()    # Here is Checking do mouse isn't colliding with walls
 
             pygame.display.flip()
 
-            ev = pygame.event.get()
-            for event in ev:
-                if event.type == pygame.KEYDOWN:
-                    """
-                    
-                    Here is bot which are checking do you are 
-                    clicking key for left, right, up or down
-                    
-                    """
-                    if event.key == pygame.K_LEFT:
-                        self.mouseX -= 4
-                    if event.key == pygame.K_RIGHT:
-                        self.mouseX += 4
-                    if event.key == pygame.K_UP:
-                        self.mouseY -= 4
-                    if event.key == pygame.K_DOWN:
-                        self.mouseY += 4
+            self.events_handling()
 
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
 
 
 App = App()
